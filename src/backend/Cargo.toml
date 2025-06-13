@@ -1,0 +1,27 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[dependencies]
+candid = "0.10.13"
+ic-cdk = "0.17.1"
+serde = "1.0.219"
+serde_json = "1.0.140"
+ic-cdk-macros = "0.17.1"
+paste = "1.0.15"
+
+
+[profile.release]
+lto = true
+opt-level = 'z'
+panic = 'abort'
+codegen-units = 1
+
+[profile.dev]
+opt-level = 0
+debug = true 

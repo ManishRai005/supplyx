@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: 130 70 230;
+    --primary-light: 150 90 250;
+    --primary-dark: 110 50 210;
+    
+    --secondary: 230 70 130;
+    --secondary-light: 250 90 150;
+    --secondary-dark: 210 50 110;
+    
+    --accent: 70 230 130;
+    --accent-light: 90 250 150;
+    --accent-dark: 50 210 110;
+    
+    --success: 34 197 94;
+    --warning: 234 179 8;
+    --error: 239 68 68;
+    
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+    
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    
+    --border: 226 232 240;
+    --input: 226 232 240;
+    
+    --font-sans: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .dark {
+    --primary: 139 92 246;
+    --primary-light: 159 112 255;
+    --primary-dark: 119 72 226;
+    
+    --secondary: 236 72 153;
+    --secondary-light: 255 92 173;
+    --secondary-dark: 216 52 133;
+    
+    --accent: 34 211 238;
+    --accent-light: 54 231 255;
+    --accent-dark: 14 191 218;
+    
+    --background: 15 23 42;
+    --foreground: 241 245 249;
+    
+    --card: 30 41 59;
+    --card-foreground: 241 245 249;
+    
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
+    
+    --border: 51 65 85;
+    --input: 51 65 85;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image: 
+      radial-gradient(at 100% 0%, rgba(var(--primary) / 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(var(--secondary) / 0.15) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium tracking-tight;
+  }
+  
+  h1 {
+    @apply text-4xl leading-[120%] md:text-5xl lg:text-6xl;
+    background: linear-gradient(to right, rgb(var(--foreground)), rgb(var(--foreground) / 0.8));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  
+  h2 {
+    @apply text-3xl leading-[120%] md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl leading-[120%] md:text-3xl;
+  }
+  
+  h4 {
+    @apply text-xl leading-[120%] md:text-2xl;
+  }
+  
+  p, li {
+    @apply leading-[150%];
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/40 rounded-full transition-colors hover:bg-primary/60;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  animation: gradient 15s ease infinite;
+  background-size: 200% 200%;
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(var(--background) / 0) 0,
+    rgba(var(--background) / 0.2) 20%,
+    rgba(var(--background) / 0.5) 60%,
+    rgba(var(--background) / 0)
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Card hover effect */
+.card-hover-effect {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  background-image: 
+    linear-gradient(to bottom right, 
+      rgba(var(--primary) / 0.1),
+      rgba(var(--background) / 0),
+      rgba(var(--secondary) / 0.1)
+    );
+}
+
+/* Glass morphism effect */
+.glass-effect {
+  @apply backdrop-blur-md bg-background/60 border border-background/20;
+  box-shadow: 0 8px 32px 0 rgba(var(--primary) / 0.1);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent animate-gradient;
+}

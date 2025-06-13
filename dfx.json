@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "canisters": {
+    "backend": {
+      "type": "rust",
+      "package": "backend",
+      "candid": "src/backend/backend.did"
+    },
+    "frontend": {
+      "type": "assets",
+      "source": ["src/frontend/dist"],
+      "build": ["cd src/frontend && npm run build"]
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
+    },
+    "ic": {
+      "type": "persistent"
+    }
+  }
+}

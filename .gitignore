@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+target/
+.dfx/
+
+# Environment
+.env
+.env.local
+
+# Build outputs
+dist/
+*.wasm
+*.wasm.gz
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Rust
+**/*.rs.bk
+Cargo.lock
+
+# ICP specific
+.azle/
+.cache/ 

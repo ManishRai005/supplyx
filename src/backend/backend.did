@@ -1,0 +1,56 @@
+type ProductStage = record {
+    stage_id: text;
+    timestamp: nat64;
+    location: text;
+    description: text;
+    certifications: vec text;
+    handler: text;
+};
+
+type Product = record {
+    id: text;
+    name: text;
+    description: text;
+    manufacturer: principal;
+    status: text;
+    ethical_score: nat32;
+    materials: vec Material;
+    certifications: vec text;
+    timeline: vec TimelineEvent;
+};
+
+type Material = record {
+    name: text;
+    percentage: nat32;
+    source: text;
+};
+
+type TimelineEvent = record {
+    date: text;
+    event: text;
+    location: text;
+};
+
+type TransferRequest = record {
+    product_id: text;
+    recipient: principal;
+    location: text;
+    notes: text;
+};
+
+type Error = variant {
+    ProductNotFound;
+    Unauthorized;
+    InvalidInput;
+};
+
+service : {
+    "add_product": (text, text) -> (text);
+    "add_stage": (text, text, text, vec text, text) -> (bool);
+    "get_product": (text) -> (variant { Ok: Product; Err: Error }) query;
+    "get_product_history": (text) -> (vec ProductStage) query;
+    "get_products": () -> (vec Product) query;
+    "create_product": (Product) -> (variant { Ok: text; Err: Error });
+    "transfer_product": (TransferRequest) -> (variant { Ok: text; Err: Error });
+    "whoami": () -> (principal) query;
+} 
